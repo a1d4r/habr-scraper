@@ -1,7 +1,7 @@
 # Web Scraper
 
 ### Description:
-Web scraper collecting content data from https://habr.com
+Async web scraper collecting content data from https://habr.com
 
 This script downloads articles to the base folder (by default `articles`). 
 Each articles is saved in a separate folder. There is a file `article.txt`
@@ -20,25 +20,18 @@ Usage: scraper [OPTIONS]
   Save articles from habr.com
 
 Options:
-  --threads INTEGER     [required]
-  --articles INTEGER    [required]
-  --help                Show this message and exit.
-
+  --articles INTEGER              [required]
+  --path PATH                     [default: articles]
+  --help                          Show this message and exit.
 ```
 
 ### Example
 
-Executing `scraper --threads 4 --articles 25` 
-will run the script with 4 threads to download 25 latest articles.
+Executing `scraper --articles 25` 
+will run the script to download 25 latest articles.
 
 The process of downloading will take some time depending on the speed 
-of your internet connection. There is a progress bar showing how 
-many articles have been downloaded:
-```shell
-Fetching urls for articles
-Downloading  [####################################]  100%          
-Done
-```
+of your internet connection.
 
 After the script finishes running, the destination folder has structure:
 ```shell

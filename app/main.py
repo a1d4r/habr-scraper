@@ -1,3 +1,4 @@
+import asyncio
 import time
 from pathlib import Path
 
@@ -11,14 +12,13 @@ app = typer.Typer()
 
 @app.command()
 def main(
-    threads: int = typer.Option(...),
     articles: int = typer.Option(...),
     path: Path = settings.DESTINATION_DIRECTORY,
 ) -> None:
     """Save articles from habr.com"""
     typer.echo('Starting...')
     start = time.time()
-    save_articles(threads, articles, path)
+    asyncio.run(save_articles(articles, path))
     elapsed = time.time() - start
     typer.echo(f'Done in {elapsed :.2f} seconds')
 

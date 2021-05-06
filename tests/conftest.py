@@ -2,7 +2,8 @@ import json
 import re
 
 import pytest
-from requests_mock import Mocker
+from aiohttp import ClientSession
+from aioresponses import aioresponses
 
 
 @pytest.fixture(scope='session')
@@ -41,10 +42,20 @@ def article_text_fragments():
         yield json.load(f)
 
 
+@pytest.fixture(scope='session')
+def mock_habr(habr_html: str, image: bytes, article_html: str):
+    with aioresponses() as m:
+        m.get(re.compile(r'https://habr.com/page\d+'), body=habr_html, repeat=True)
+        m.get(
+            re.compile(r'https://habr.com/\w+/(company|post)/\S+'),
+            body=article_html,
+            repeat=True,
+        )
+        m.get(re.compile(r'https://habrastorage.org/\S+'), body=image, repeat=True)
+        yield
+
+
 @pytest.fixture()
-def mock_habr(requests_mock: Mocker, habr_html: str, image: bytes, article_html: str):
-    requests_mock.get(re.compile(r'https://habr.com/page\d+'), text=habr_html)
-    requests_mock.get(
-        re.compile(r'https://habr.com/\w+/(company|post)/\S+'), text=article_html
-    )
-    requests_mock.get(re.compile(r'https://habrastorage.org/\S+'), content=image)
+async def client_session():
+    async with ClientSession() as session:
+        yield session
