@@ -17,7 +17,7 @@ logger.disabled = not settings.DETAILED_LOGS
 
 def get_article_urls_from_page(page: int) -> List[str]:
     response = requests.get(
-        f'{settings.BASE_URL}/page{page}/', timeout=settings.RESPONSE_TIMEOUT
+        f'{settings.BASE_URL}/all/page{page}/', timeout=settings.RESPONSE_TIMEOUT
     )
     response.raise_for_status()
     feed_parser = HabrFeedParser(response.text)

@@ -43,7 +43,7 @@ def article_text_fragments():
 
 @pytest.fixture()
 def mock_habr(requests_mock: Mocker, habr_html: str, image: bytes, article_html: str):
-    requests_mock.get(re.compile(r'https://habr.com/page\d+'), text=habr_html)
+    requests_mock.get(re.compile(r'https://habr.com/all/page\d+'), text=habr_html)
     requests_mock.get(
         re.compile(r'https://habr.com/\w+/(company|post)/\S+'), text=article_html
     )

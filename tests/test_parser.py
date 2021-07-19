@@ -17,7 +17,7 @@ def test_get_article_text(article_html: str, article_text_fragments: List[str]):
 
 def test_get_article_title(article_html: str):
     article_parser = HabrArticleParser(article_html)
-    expected = 'Кто помнит «старшего брата» CD и DVD? / Хабр'
+    expected = 'Digital-мероприятия в Москве c 19 по 25 июля'
     assert article_parser.get_title() == expected
 
 

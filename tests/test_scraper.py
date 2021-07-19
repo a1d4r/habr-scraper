@@ -33,7 +33,7 @@ def test_get_article_from_url(article_html: str):
 @pytest.mark.usefixtures('mock_habr')
 def test_save_article(tmp_path: Path):
     scraper.save_article('https://habr.com/ru/post/551328/', tmp_path)
-    dirname = to_valid_filename('Кто помнит «старшего брата» CD и DVD? / Хабр')
+    dirname = to_valid_filename('Digital-мероприятия в Москве c 19 по 25 июля')
 
     assert (tmp_path / dirname).exists()
     assert (tmp_path / dirname / 'article.txt').exists()
@@ -42,7 +42,7 @@ def test_save_article(tmp_path: Path):
 @pytest.mark.usefixtures('mock_habr')
 def test_save_articles(tmp_path: Path):
     scraper.save_articles(1, 1, tmp_path)
-    dirname = to_valid_filename('Кто помнит «старшего брата» CD и DVD? / Хабр')
+    dirname = to_valid_filename('Digital-мероприятия в Москве c 19 по 25 июля')
 
     assert (tmp_path / dirname).exists()
     assert (tmp_path / dirname / 'article.txt').exists()

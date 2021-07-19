@@ -11,7 +11,7 @@ runner = CliRunner()
 
 @pytest.mark.usefixtures('mock_habr')
 def test_app(tmp_path: Path):
-    dirname = to_valid_filename('Кто помнит «старшего брата» CD и DVD? / Хабр')
+    dirname = to_valid_filename('Digital-мероприятия в Москве c 19 по 25 июля')
     result = runner.invoke(
         app, ['--threads', '1', '--articles', '1', '--path', str(tmp_path)]
     )
